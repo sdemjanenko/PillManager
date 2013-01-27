@@ -1,0 +1,26 @@
+.pill {
+  border: 1px solid #AAA;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  display: inline-block;
+  padding: 2px;
+  margin: 2px;
+}
+
+.pill .close {
+  border: 1px solid #AAA;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  padding: 0 2px 0 2px;
+  margin-right: 5px;
+}
+
+.pill .close:hover {
+  background-color: #EEE;
+}
