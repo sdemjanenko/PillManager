@@ -1,5 +1,5 @@
 var Pill = (function($) {
-  var skeleton = $("<div class='pill'><span class='value'></span><span class='close'>x</span><div/>");
+  var skeleton = $("<div class='pill'><span class='close'>x</span><span class='value'></span><div/>");
 
   var ctor = function(container, value) {
     var _this = this;
