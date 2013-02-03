@@ -8,7 +8,7 @@ var Pill = (function($) {
     _this.value = value;
     _this.text = text || value;
 
-    _this.$el.on('click', '.close', function() { _this.destroy.call(_this); });
+    _this.$el.on('click', '.close', function(e) { e.stopPropagation(); _this.destroy.call(_this); });
     _this.render();
     container.append(_this.$el);
   };
