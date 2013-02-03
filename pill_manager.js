@@ -1,28 +1,25 @@
 var Pill = (function($) {
   var skeleton = $("<div class='pill'><span class='close'>x</span><span class='value'></span><div/>");
 
-  var ctor = function(container, value) {
+  var ctor = function(container, value, text) {
     var _this = this;
     _this.$el = skeleton.clone();
 
     _this.value = value;
-    _this.changeValue(value, {silent: true});
-    _this.$el.on('click', '.close', function() { _this.destroy.call(_this); });
+    _this.text = text || value;
 
-    container.append(this.$el);
+    _this.$el.on('click', '.close', function() { _this.destroy.call(_this); });
+    _this.render();
+    container.append(_this.$el);
   };
 
   ctor.prototype = {
-    changeValue: function(new_value, options) {
-      this.value = new_value;
-      this.$el.find('.value').text(new_value);
-      if (options && !options.silent)
-        $(this).trigger('change', [new_value]);
-    },
     destroy: function() {
       this.$el.remove();
-      $(this).trigger('change:destroyed');
-      $(this).off();
+      $(this).trigger('change:destroyed').off();
+    },
+    render: function() {
+      this.$el.find('.value').text(this.text);
     }
   };
 
@@ -36,9 +33,9 @@ var PillCollection = (function($) {
   };
 
   ctor.prototype = {
-    addPill: function(value) {
+    addPill: function(value, text) {
       var _this = this,
-          new_pill = new Pill(_this.container, value);
+          new_pill = new Pill(_this.container, value, text);
 
       $(new_pill).on('change:destroyed', function() { _this.removePill(new_pill); });
       this.pills.push(new_pill);
@@ -56,7 +53,7 @@ var PillCollection = (function($) {
         pills.shift().destroy();
 
       if (values)
-        $.each(values, function(i, value) { _this.addPill(value); });
+        $.each(values, function(i, value) { _this.addPill.apply(_this, value); });
     },
     value: function() {
       return $.map(this.pills, function(pill) { return pill.value; });
