@@ -37,8 +37,9 @@ var PillCollection = (function($) {
 
   ctor.prototype = {
     addPill: function(value) {
-      var new_pill = new Pill(this.container, value);
-      var _this = this;
+      var _this = this,
+          new_pill = new Pill(_this.container, value);
+
       $(new_pill).on('change:destroyed', function() { _this.removePill(new_pill); });
       this.pills.push(new_pill);
     },
@@ -47,17 +48,18 @@ var PillCollection = (function($) {
       if (index !== -1)
         this.pills.splice(index, 1);
     },
-    reset: function() {
-      var _this = this;
-      $.each(_this.pills, function() { this.destroy(); });
+    reset: function(values) {
+      var _this = this,
+          pills = _this.pills;
+
+      while (pills.length > 0)
+        pills.shift().destroy();
+
+      if (values)
+        $.each(values, function(i, value) { _this.addPill(value); });
     },
     value: function() {
       return $.map(this.pills, function(pill) { return pill.value; });
-    },
-    setValue: function(values) {
-      var _this = this;
-      _this.reset();
-      $.each(values, function() { _this.addPill(this); });
     }
   };
 
