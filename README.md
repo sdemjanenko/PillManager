@@ -6,13 +6,12 @@ Lightweight JS pill collection
     var foo = new PillCollection($('body'));
 
 ###Add a pill
-    foo.addPill("some value");
+    foo.addPill("value");
+    foo.addPill("value", "text");
 
 ###Reset
-Clear out the values
     foo.reset();
-or set a particular value
-    foo.reset(['foo', 'bar']);
+    foo.reset([['fooVal', 'fooText'], ['bar']]);
 
 ##Dependencies
 - jQuery
