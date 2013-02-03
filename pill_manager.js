@@ -21,7 +21,7 @@ var Pill = (function($) {
     },
     destroy: function() {
       this.$el.remove();
-      $(this).trigger('destroyed');
+      $(this).trigger('change:destroyed');
       $(this).off();
     }
   };
@@ -39,7 +39,7 @@ var PillCollection = (function($) {
     addPill: function(value) {
       var new_pill = new Pill(this.container, value);
       var _this = this;
-      $(new_pill).on('destroyed', function() { _this.removePill(new_pill); });
+      $(new_pill).on('change:destroyed', function() { _this.removePill(new_pill); });
       this.pills.push(new_pill);
     },
     removePill: function(pill) {
@@ -47,8 +47,17 @@ var PillCollection = (function($) {
       if (index !== -1)
         this.pills.splice(index, 1);
     },
+    reset: function() {
+      var _this = this;
+      $.each(_this.pills, function() { this.destroy(); });
+    },
     value: function() {
       return $.map(this.pills, function(pill) { return pill.value; });
+    },
+    setValue: function(values) {
+      var _this = this;
+      _this.reset();
+      $.each(values, function() { _this.addPill(this); });
     }
   };
 
