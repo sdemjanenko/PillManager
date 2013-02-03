@@ -16,11 +16,13 @@ You can add a pill with a value and/or customize the text in the pill.  If no te
 
 ### Reset
 Clear out the pills to a blank state, or set the desired state.
+
     foo.reset();
     foo.reset([['fooVal', 'fooText'], ['bar']]);
 
 ### Value
 Access the current state representated in the collection
+
     foo.value()
 
 ##Dependencies
