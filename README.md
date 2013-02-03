@@ -10,10 +10,12 @@ Add a container element
     var foo = new PillCollection($('#pill-collection'));
 
 ### Add a pill
+You can add a pill with a value and/or customize the text in the pill.  If no text is given it defaults to the passed value.
     foo.addPill("value");
     foo.addPill("value", "text");
 
 ### Reset
+Clear out the pills to a blank state, or set the desired state.
     foo.reset();
     foo.reset([['fooVal', 'fooText'], ['bar']]);
 
